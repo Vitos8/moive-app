@@ -4,7 +4,8 @@ import './index.scss';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.min.css';
-
+import { store } from './store/store'
+import { Provider } from 'react-redux'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,8 +13,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );

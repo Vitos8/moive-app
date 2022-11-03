@@ -19,9 +19,9 @@ const SignUp = () => {
 		theme: "colored",
 	});
 
-	let register = (email:string, password:string) => {
-		if(email === '' || password === '') {
-			return onError("Email or password isn't eneterd ");
+	let register = (email:string, password:string, name:string | undefined) => {
+		if(email === '' || password === '' || name === '') {
+			return onError("Name,email or password isn't eneterd ");
 		}
 
 		createUserWithEmailAndPassword(auth, email, password)

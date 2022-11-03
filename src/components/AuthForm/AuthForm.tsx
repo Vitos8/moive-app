@@ -23,7 +23,7 @@ const AuthForm:FC<authFormProps> = ({label, button, span, onSubmit}) => {
     }
 
     return (
-        <div className='auth'>
+        <div className='auth' style={{height: `${label === 'Log in' ? '450px' : '498px'}`}}>
             <div className="auth__overlay">
                 <form className='auth-form' onSubmit={(e: any) => onSubmitAuthForm(e)}>
                     <label className='auth-form__label'>{label}</label>
