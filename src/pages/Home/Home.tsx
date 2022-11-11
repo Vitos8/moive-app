@@ -5,7 +5,7 @@ import {db} from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {auth} from '../../firebase'
 import { setUser } from "../../store/userSlcie/userSlice";
-import { useSelector, useDispatch } from 'react-redux'
+import {useDispatch } from 'react-redux'
 import { RootState } from "../../store/store";
 import { useNavigate } from 'react-router-dom'
 import Header from "../../components/Header/Header";
@@ -14,7 +14,6 @@ import MainSlider from "../../components/MainSlider/MainSlider";
 
 const Home = () => {
      const [user] = useAuthState(auth);
-     const currentUser = useSelector((state: RootState) => state.user?.user)
      const dispatch = useDispatch()
      let navigate = useNavigate();
 
