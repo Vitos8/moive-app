@@ -1,0 +1,77 @@
+
+.main-slider{
+	&__image{
+		position: absolute;
+		z-index: 1;
+		height: 100vh; 	
+		width: 100%;
+		object-fit: cover;
+		margin-bottom: 100vh;
+	}
+
+	&__content{
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 402px;
+		color: white;
+		z-index: 10;
+		margin-top: 130px;
+		background-color: rgba(0, 0, 0, 0.477);
+		padding: 30px;
+		border-radius: 30px;
+	}
+
+	&__container{
+		max-width: 1270px;
+		margin: 0 auto;
+		position: relative;	
+		z-index: 10;
+	}
+
+	&__row{
+		height: 100vh;
+	}
+
+	&__title{
+		font-family: 'DM Sans';
+		font-weight: 700;
+		font-size: 48px;
+		line-height: 56px;
+	}
+
+	&__subtitle{
+		font-family: 'DM Sans';
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 18px;
+	}
+
+	&__btn{
+		font-family: 'DM Sans';
+		font-weight: 700;
+		font-size: 14px;
+		line-height: 24px;
+		text-transform: uppercase;
+		color: #FFFFFF;
+		background: #BE123C;
+		border-radius: 6px;
+		padding: 7px 30px;
+		cursor: pointer;
+		border: none;
+		transition: all .2s ease;
+		margin-top: 30px;;
+
+		&:hover{
+			opacity: 0.7;
+		}
+
+		&:active{
+			opacity: 1;
+		}
+	}
+
+	&__rate{
+
+	}
+}

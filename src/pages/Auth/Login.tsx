@@ -1,43 +1,40 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import AuthForm from '../../components/AuthForm/AuthForm'
 import { useNavigate } from 'react-router-dom'
-import {toast} from 'react-toastify'
 import {signInWithEmailAndPassword} from 'firebase/auth'
 import {auth} from '../../firebase'
-
+import { useAuthState } from "react-firebase-hooks/auth";
+import { onSucces, onError } from '../../utils/toasts';
+import Spinner from '../../components/Spinner/Spinner'
 
 const Login = () => {
-	const [error, setError] = useState<String>('Invalid email or password');
+	const [user, loading] = useAuthState(auth);
 	let navigate = useNavigate();
-	const onError = (error:string) => toast.error(error, {
-		position: "top-center",
-		autoClose: 5000,
-		hideProgressBar: false,
-		closeOnClick: true, 
-		pauseOnHover: true,
-		draggable: true,
-		progress:'' ,
-		theme: "colored",
-	});
 
 	let SignIn = (email:string, password:string) => {
 		if(email === '' || password === '') {
 			return onError("Email or password isn't eneterd ");
 		}
-
 		signInWithEmailAndPassword(auth, email, password)
 		.then((res:any) => {
-			navigate('/')
+			onSucces('You have authoried succesfully !');
+			return navigate('/');
 		})
 		.catch((err:any) => {
 			onError(err.message);
 		})
-
 	}
+	
+	useEffect(() => {
+		if (user) {
+			onSucces('You have authoried succesfully !');
+			return navigate('/');
+		};
+	}, [user]);
 
 	return (
 		<div className='auth-bg'>
-			<AuthForm label='Log in' button='Log in' span="Don't have an account?" onSubmit={SignIn}  />
+			{ !loading ? <AuthForm label='Log in' button='Log in' span="Don't have an account?" onSubmit={SignIn}  /> :  <Spinner/>}
 		</div>
 	)	
 }		

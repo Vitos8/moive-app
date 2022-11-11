@@ -1,0 +1,187 @@
+
+.header {
+	padding: 15px 0px;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 10;
+	transition: all .4s ease-in-out;
+	border-radius: 0px 0px 70px 70px ;
+
+	&__nav{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&__logo{
+		cursor: pointer;
+		transition: opacity .3s ease-out ;
+
+		&:hover{
+			opacity: 0.7;
+		}
+	}
+
+	.search{
+		position: relative;
+
+		&__input{
+			font-family: 'DM Sans';
+			font-weight: 400;
+			font-size: 16px;
+			line-height: 24px;
+			padding: 6px 10px;
+			width: 525px;
+			border: 2px solid #D1D5DB;
+			border-radius: 6px;	
+			background-color: transparent;
+			color: #ffff;
+			padding-right: 30px;
+
+			&:focus{
+				outline: none;
+			}
+
+			&::placeholder{
+				color: white;
+			}
+		}
+
+		&__icon{
+			position: absolute;
+			top: 12px;
+			right: 10px;
+			width: 16px;
+			height: 16px;
+			cursor: pointer;
+		}
+	}
+}
+
+
+//Dropdown
+
+
+.action {
+	position: relative;
+	display: flex;
+	align-items: center;
+	column-gap: 15px;
+	cursor: pointer;
+	transition: all .3s ease-in-out;
+	padding: 6px 20px;
+	border-radius: 50px;
+
+	span{
+		font-size: 18px;
+		padding: 0px 0;
+		font-weight: 500;
+		color: #fff;
+		line-height: 1.5em;
+	}
+
+	&:hover{
+		background-color: rgba(255, 255, 255, 0.662);
+
+		span{
+			color: #555;
+		}
+	}
+}
+
+.action .profile {
+	position: relative;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.action .profile img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.action .menu {
+	position: absolute;
+	top: 120px;
+	right: 10px;
+	padding: 0px;
+	background: #fff;
+	width: 220px;
+	box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
+	border-radius: 15px;
+	transition: 0.5s;
+	visibility: hidden;
+	opacity: 0;
+}
+
+.action .menu.active {
+	top: 80px;
+	visibility: visible;
+	opacity: 1;
+}
+
+.action .menu::before {	
+	content: "";
+	position: absolute;
+	top: -5px;
+	right: 25px;
+	width: 20px;
+	height: 20px;
+	background: #fff;
+	transform: rotate(45deg);
+}
+
+.action .menu h3 {
+	width: 100%;
+	text-align: center;
+	font-size: 18px;
+	padding: 0px 0;
+	font-weight: 500;
+	color: #555;
+	line-height: 1.5em;
+}
+
+.action .menu h3 span {
+	font-size: 14px;
+	color: #afadad;
+	font-weight: 300;
+}
+
+.action .menu ul li {
+	list-style: none;
+	padding: 16px 0;
+	border-top: 1px solid rgba(0, 0, 0, 0.05);
+	display: flex;
+	align-items: center;
+}
+
+.action .menu ul li img {
+	max-width: 20px;
+	margin-right: 10px;
+	opacity: 0.5;
+	transition: 0.5s;
+}
+
+.action .menu ul li:hover img {
+	opacity: 1;
+}
+
+.action .menu ul li a {
+	display: inline-block;
+	text-decoration: none;
+	color: #555;
+	font-weight: 500;
+	transition: 0.5s;
+}
+
+.action .menu ul li:hover a {
+	color: #ff5d94;
+}
