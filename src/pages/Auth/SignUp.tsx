@@ -17,8 +17,6 @@ const SignUp = () => {
 		if(email === '' || password === '' || name === '') {
 			return onError("Name,email or password isn't eneterd ");
 		}
-		
-	
 		try {
 			let response = await createUserWithEmailAndPassword(auth, email, password);
 			let newUser = {uid:response.user?.uid,	 name ,email,};   

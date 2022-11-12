@@ -5,11 +5,11 @@ export interface userState {
 	user: {
 		name:string
 		email: string	
-		uid?: number
+		uid?: string
 	}
 }
 
-const initialState:userState = {
+let initialState:userState = {
 	user: {
 		name: '',
 		email: '',
@@ -21,11 +21,11 @@ export const userSlice = createSlice({
 	initialState,
 	reducers: {
 		setUser: (state, action:PayloadAction<any>) => {
-			state.user =	action.payload;
+			state.user = action.payload
 		}
 	},
 })
 
-export const {setUser} = userSlice.actions
-
-export default userSlice.reducer
+const { actions, reducer } = userSlice;
+export const {setUser} = actions;
+export default reducer

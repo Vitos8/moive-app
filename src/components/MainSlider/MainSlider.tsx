@@ -1,21 +1,19 @@
 import React, { useEffect, useState} from 'react'
 import "./MainSlider.scss";
-import axios from 'axios';
 import Slider from "react-slick";
 import FilmService from '../../services/FilmService';
 
 const MainSlider = () => {
 	const [data, setData] = useState<any>([]);
-  const newService = new FilmService();
+	const newService = new FilmService();
 
-  let fun = async () => {
-    let results = await newService.getTrending();
-    setData(results.slice(0,9))
-  }
+	let fun = async () => {
+		let results = await newService.getTrending();
+		setData(results.slice(0,8))
+	}
 
 	useEffect(() => {
-    fun()
-
+		fun();		
 	},[]);	
 		
 	const settings:any = {
@@ -25,7 +23,7 @@ const MainSlider = () => {
 		verticalSwiping: true,
 		swipeToSlide: true,
 		autoplay: true,
-		fade: true	,
+		fade: true,
 		speed: 500,
 		slidesToShow: 1,
 		slidesToScroll: 1,
