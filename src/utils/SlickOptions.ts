@@ -1,4 +1,3 @@
-import SliderArrow from "../components/Arrow/SliderArrow"
 
 export const MainSliderSettings:any = {
 	dots: false,
@@ -12,18 +11,19 @@ export const MainSliderSettings:any = {
 	slidesToShow: 1,
 	slidesToScroll: 1,
 	arrows: false,
+	pauseOnHover: false
 }
 
 export const CardSliderSettings:any = {
-	arrows: true,
+	arrows: false,
 	dots: true,
-	infinite: false,
-	speed: 400,
+	infinite: true,
+	speed: 700,
 	swipetoSlide: true,
 	adaptiveHeight: true,
 	slidesToShow: 4,
 	slidesToScroll: 4,
-	autoPlay: true,
+	autoplay: true,
 	responsive: [
 	{
 		breakpoint: 1090,

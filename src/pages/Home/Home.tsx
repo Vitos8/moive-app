@@ -5,16 +5,24 @@ import {db} from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {auth} from '../../firebase'
 import { setUser } from "../../store/userSlice/userSlice";
-import {useDispatch } from 'react-redux'
+import {useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import MainSlider from "../../components/MainSlider/MainSlider";
 import CardSlider from "../../components/CardSlider/CardSlider";
+import { fetchPopular } from "../../store/movieSclice/movieSlice";
+import { fetchTrending } from "../../store/movieSclice/movieSlice";
+import { fetchPeople } from "../../store/movieSclice/movieSlice";
+import { fetchNew } from "../../store/movieSclice/movieSlice";
+import { AppDispatch, RootState } from "../../store/store";
 
 const Home = () => {
      const [user] = useAuthState(auth);
-     const dispatch = useDispatch()
+     let people = useSelector((state:RootState) => state.movie?.people)
+     let newMovies = useSelector((state:RootState) => state.movie?.new)
+     let popularMovies = useSelector((state:RootState) => state.movie?.popular)
+     const dispatch = useDispatch<AppDispatch>()
      let navigate = useNavigate();
 
      const fetchUserName = async () => {
@@ -22,8 +30,6 @@ const Home = () => {
                const q = query(collection(db, "users"), where("uid", "==", user?.uid));
                const doc = await getDocs(q);
                const data = doc.docs[0].data();
-               console.log(data);
-               
                     
                dispatch(setUser(data))          
           
@@ -32,9 +38,15 @@ const Home = () => {
           }
      };
      
+     useEffect(() => {
+          dispatch(fetchTrending());
+          dispatch(fetchPopular());
+          dispatch(fetchPeople());
+          dispatch(fetchNew());
+     },[])
 
      useEffect(() => {
-          //if (!user) return navigate('/SignUp');
+               if (!user) return navigate('/SignUp');
                fetchUserName();
      },[user]);
 
@@ -42,10 +54,9 @@ const Home = () => {
           <div className="home">
                <Header/>
                <MainSlider/>               
-               <CardSlider title="Featured Movie" type="movie" /> 
-               <CardSlider title="New Arrival" type="movie" /> 
-               <CardSlider title="Featured Movie" type="movie" /> 
-
+               <CardSlider title="Featured Movie" type="movie" data={popularMovies} /> 
+               <CardSlider title="New Arrival" type="movie" data={newMovies} /> 
+               <CardSlider title="Featured actors" type="people" data={people}  /> 
                <Footer/>
           </div>
      )

@@ -24,7 +24,7 @@ const Dropdown = () => {
 			<div className="profile">
 				<img src={`${user?.photoURL ?  user?.photoURL : 'Profile.png'}`} />
 			</div>
-			<div className={`menu ${activeMenu ? 'active'  : ''}`}>
+			<div className={`menu ${activeMenu ? 'active'  : ''}`} >
 				<h3>{currentUser?.name}<br /><span>{currentUser?.email}</span></h3>
 				<ul>
 					<li>

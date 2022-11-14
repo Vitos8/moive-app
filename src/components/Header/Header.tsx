@@ -28,7 +28,7 @@ const Header = () => {
 						<input className='search__input'  type="text" placeholder='What do you want to watch?' />
 						<img  className='search__icon' src="Search.png" alt="search" />
 					</div>
-					<Dropdown/>
+					<Dropdown  />
 				</nav>
 			</div>
 		</div>

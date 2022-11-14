@@ -1,1 +1,0 @@
-export let trendingAPI = 'https://api.themoviedb.org/3/trending/movie/week?api_key=f2806dca9da61eeec0705fa9fceccb1a';

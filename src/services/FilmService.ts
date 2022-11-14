@@ -1,4 +1,3 @@
-import { isTemplateExpression } from "typescript";
 import {onError} from "../utils/toasts"; 
 
 class FilmService {
@@ -21,38 +20,43 @@ class FilmService {
      }
 
      getTrending = async () => {
-     const res = await this.getResource(`${this._apiBase}trending/movie/week?api_key=${this._apiKey}`); 
-     return res.results.map((item:any) => this._transcriptFilm(item));
+          const res = await this.getResource(`${this._apiBase}trending/movie/week?api_key=${this._apiKey}`);           
+          return res.results.map((item:any) => this._transcriptFilm(item)).slice(0,10);
      }
 
      getFilmByID = async (id:number) => {
-     const res = await this.getResource(`${this._apiBase}movie/${id}?api_key=${this._apiKey}`); //Request to DBі
-     return this._transcriptFilmId(res);
+          const res = await this.getResource(`${this._apiBase}movie/${id}?api_key=${this._apiKey}&language=en-US`); //Request to DBі
+          return res;
      }
 
      getPopular = async (page = this._basePage) => {
-     const res = await this.getResource(`${this._apiBase}movie/popular?api_key=${this._apiKey}&language=en-US&page=${page}`); // required page number
-     return res.results.map((item:any) => this._transcriptFilm(item));
-     }
-
-     getGenres = async() => {
-     const res = await this.getResource(`${this._apiBase}genre/movie/list?api_key=${this._apiKey}&language=en-US`);
-     return res.genres;
+          const res = await this.getResource(`${this._apiBase}movie/popular?api_key=${this._apiKey}&language=en-US&page=${page}`); // required page number
+          return res.results.map((item:any) => this._transcriptFilm(item));
      }
 
      getSearched = async (query:string) => {
-     const res = await this.getResource(`${this._apiBase}search/movie?query=${query}&api_key=${this._apiKey}`);
-     return res.results.map((item:any) => this._transcriptFilm(item));
+          const res = await this.getResource(`${this._apiBase}search/movie?query=${query}&api_key=${this._apiKey}`);
+          return res.results.map((item:any) => this._transcriptFilm(item));
      }
 
      getSimiliar = async(id:number) => {
-     const res = await this.getResource(`${this._apiBase}movie/${id}/similar?api_key=${this._apiKey}&language=en-US&${this._basePage}`); // required page number
-     return res.results.map((item:any) => this._transcriptFilm(item));
+          const res = await this.getResource(`${this._apiBase}movie/${id}/similar?api_key=${this._apiKey}&language=en-US&${this._basePage}`); // required page number
+          return res.results.map((item:any) => this._transcriptFilm(item));
      }
 
      getVideo = async(id:number) => {
-     const res = await this.getResource(`${this._apiBase}movie/${id}/videos?api_key=${this._apiKey}&language=en-US&$`); 
-     return res.results.map((item:any) => this._transcriptVideo(item));
+          const res = await this.getResource(`${this._apiBase}movie/${id}/videos?api_key=${this._apiKey}&language=en-US&$`); 
+          return res.results.map((item:any) => this._transcriptVideo(item));
+     }
+
+     getPeople = async() => {
+          const res = await this.getResource(`${this._apiBase}person/popular?api_key=${this._apiKey}&language=en-US&page=2`);           
+          return res.results.map((item:any) => this._transcriptPeople(item));
+     }
+
+     getNew = async() => {
+          const res = await this.getResource(`${this._apiBase}movie/upcoming?api_key=${this._apiKey}&language=en-US&page=2`); // required page number
+          return res.results.map((item:any) => this._transcriptFilm(item));
      }
 
      _transcriptVideo(film:any) {
@@ -77,13 +81,21 @@ class FilmService {
      }
 
      _transcriptFilmId(film:any) {
-     return {
-          id: film.id,
-          title: film.original_title,
-          genre_ids: film.genres.map((gen:any) => gen.id),
-          description: film.overview,
-          poster_path: 'https://image.tmdb.org/t/p/w500' + film.poster_path,
+          return {
+               id: film.id,
+               title: film.original_title,
+               genre_ids: film.genres.map((gen:any) => gen.id),
+               description: film.overview,
+               poster_path: 'https://image.tmdb.org/t/p/w500' + film.poster_path,
+          }
      }
+
+     _transcriptPeople(people:any) {
+          return {
+               id: people.id,
+               title: people.name,
+               poster: 'https://image.tmdb.org/t/p/w500' + people.profile_path,
+          }
      }
 }
 
