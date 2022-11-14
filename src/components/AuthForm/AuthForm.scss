@@ -1,0 +1,133 @@
+
+.auth{
+	padding: 38px;
+	width: 390px;
+	height: 498px;
+	background: rgba(230, 238, 248, 0.49);
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+
+	&__overlay{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: #E6EEF8;
+	}
+}
+
+.auth-form{
+	padding: 60px 71px 100px 71px;
+
+	&__label{
+		display: block;
+		margin-bottom: 50px;
+		font-family: 'Roboto';
+		font-weight: 700;
+		font-size: 25px;
+		line-height: 19px;
+		text-align: center;
+		letter-spacing: 1px;
+	}
+
+	&__input-row{
+		position: relative;
+	}
+
+	&__input{
+		font-family: 'Roboto';
+		font-weight: 700;
+		font-size: 14px;
+		line-height: 16px;
+		letter-spacing: 1px;
+		background: linear-gradient(0deg, #E6EEF8, #E6EEF8), #CFD8DC;
+		box-shadow: inset -4px -4px 12px rgba(253, 255, 255, 0.8), inset 4px 4px 12px rgba(187, 195, 206, 0.6);
+		border-radius: 16px;
+		padding: 12px 11px;
+		color: #65537C;
+		border: none;
+		width: 250px;
+		transition: all .3s ease;
+		margin-bottom: 25px;
+		transition: all .3s ease;
+		padding-right: 35px;
+
+		&::-webkit-input-placeholder{
+			color: #90A4AE;
+		}
+
+
+		&:hover{
+			filter: brightness(104%);
+		}
+
+		&:focus{
+			outline: none;
+			filter: brightness(104%);
+
+		}
+	}
+
+	&__input-img{
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		cursor: pointer;
+
+		&:hover{
+			opacity: 0.7;
+		}
+	}
+
+	&__button{
+		width: 100%;
+		background: #65537C;
+		box-shadow: -4px -4px 12px rgba(253, 255, 255, 0.8), 4px 4px 12px rgba(187, 195, 206, 0.6);
+		border-radius: 16px;
+		border: none;
+		font-family: 'Roboto';
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 19px;
+		text-align: center;
+		letter-spacing: 1px;
+		color: #FFFFFF;
+		padding: 10px 28px;
+		transition: opacity .2s ease;
+
+		&:hover{
+			opacity: 0.7;
+			cursor: pointer;
+		}
+
+		&:active{
+			opacity: 1;
+		}
+	}
+
+	&__span{
+		font-family: 'Roboto';
+		display: block;
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 19px;
+		color: #65537C;
+		text-align: center;
+		margin-top: 20px;
+
+		i{
+			color: rgba(0, 0, 255, 0.458);
+			text-decoration: underline;
+			cursor: pointer;
+		}
+	}
+}
+
+
+
+
+
+

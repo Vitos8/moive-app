@@ -1,0 +1,46 @@
+.footer{
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     padding: 120px 0px 70px 0px;
+
+     &__icons{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          column-gap: 40px;
+          margin-bottom: 37px;
+     }
+
+     &__privacy{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          column-gap: 40px;
+          margin-bottom: 37px;
+
+          &-item{
+               font-family: 'DM Sans';
+               font-weight: 700;
+               font-size: 18px;
+               line-height: 23px;
+               color: #111827;
+               cursor: pointer;
+          }
+     }
+
+     &__info{
+          text-align: center;
+
+          span{
+               font-family: 'DM Sans';
+               font-weight: 700;
+               font-size: 18px;
+               line-height: 23px;
+               color: #6B7280;
+               cursor: pointer;
+
+          }
+     }
+
+}
