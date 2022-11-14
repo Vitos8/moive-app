@@ -1,3 +1,4 @@
+import { isTemplateExpression } from "typescript";
 import {onError} from "../utils/toasts"; 
 
 class FilmService {
@@ -69,6 +70,7 @@ class FilmService {
           title: film.original_title,
           genres_ids: film.genre_ids,
           description: film.overview,
+          rate: film.vote_average,
           poster: 'https://image.tmdb.org/t/p/w500' + film.poster_path,
           backdrop:this._imgPath + film.backdrop_path,
      }

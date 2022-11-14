@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import MainSlider from "../../components/MainSlider/MainSlider";
+import CardSlider from "../../components/CardSlider/CardSlider";
 
 const Home = () => {
      const [user] = useAuthState(auth);
@@ -21,7 +22,8 @@ const Home = () => {
                const q = query(collection(db, "users"), where("uid", "==", user?.uid));
                const doc = await getDocs(q);
                const data = doc.docs[0].data();
-                    console.log(data);
+               console.log(data);
+               
                     
                dispatch(setUser(data))          
           
@@ -40,6 +42,10 @@ const Home = () => {
           <div className="home">
                <Header/>
                <MainSlider/>               
+               <CardSlider title="Featured Movie" type="movie" /> 
+               <CardSlider title="New Arrival" type="movie" /> 
+               <CardSlider title="Featured Movie" type="movie" /> 
+
                <Footer/>
           </div>
      )

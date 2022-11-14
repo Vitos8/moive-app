@@ -1,0 +1,99 @@
+
+.card-slider {
+	margin-top: 70px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-bottom: 0px;
+
+	&__title{
+		font-family: 'DM Sans';
+		font-weight: 700;
+		font-size: 36px;
+		line-height: 47px;
+	}
+
+	&__more{
+		cursor: pointer;
+		font-family: 'DM Sans';
+		font-weight: 400;
+		font-size: 18px;
+		line-height: 24px;
+		color: #BE123C;
+		transition: all .3s ease;
+		margin-right: 55px;
+
+		&:hover{
+			opacity: 0.7;
+		}
+	}
+}
+
+.card{
+	padding: 10px 0px 70px 10px;
+	cursor: pointer;
+	transition: all .3s ease-in-out;
+
+	
+	&__poster{
+		transition: all .3s ease-in-out;
+		width: 250px;
+		height: 370px;
+		position: relative;
+		margin-bottom: 30px;
+	}
+	
+		&:hover{
+			.card__poster{
+				padding: 7px;
+					box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+			}
+		}
+	
+	&__poster-img{
+		width: 100%;
+		height: 100%;
+	}
+
+	&__poster-heart{
+		background: rgba(243, 244, 246, 0.5);
+		backdrop-filter: blur(1px);
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		padding:10px;
+		border-radius: 20px;
+		transition: all .3s ease;
+		cursor: pointer;
+
+		&:hover{
+			background-color: #BE123C;
+		}
+	}
+
+	&__info{
+
+	}
+
+	&__info-row{
+		display: flex;
+		column-gap: 20px;
+	}
+
+	&__title{
+		font-family: 'DM Sans';
+		font-weight: 700;
+		font-size: 18px;
+		line-height: 23px;
+		color: #111827;
+		margin-bottom: 15px;
+	}
+
+	&__imdb{
+		width: 40px;
+	}
+
+	&__rate{
+
+	}
+}

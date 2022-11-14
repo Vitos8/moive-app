@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { useSelector, useDispatch 	} from 'react-redux'
-import { RootState } from "../../store/store";
+//import { RootState } from "../../store/store";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {auth} from '../../firebase'
 import { logout } from '../../firebase';
@@ -8,7 +8,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Dropdown = () => {
 	const [activeMenu, setActiveMenu] = useState<Boolean>(false);
-	const currentUser = useSelector((state: RootState) => state.user?.user)
+	const currentUser = useSelector((state: any) => state.user?.user)
+	
      const [user] = useAuthState(auth);
 	let navigate = useNavigate();
 
