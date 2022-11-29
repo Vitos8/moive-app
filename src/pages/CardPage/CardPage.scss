@@ -1,0 +1,162 @@
+.card-page{
+     height: 100%;
+     padding-top: 150px;
+     padding-bottom: 50px;
+
+     &__row{
+          display: flex;
+          column-gap: 40px;
+          justify-content: space-around;
+     }
+
+     &__title{
+          text-align: center;
+          font-family: 'DM Sans';
+          font-weight: 700;
+          font-size: 36px;
+          line-height: 47px;
+          color: #BE123C;
+     }
+
+     &__text{
+          font-family: 'DM Sans';
+          font-weight: 500;
+          font-size: 19px;
+          line-height: 26px;
+     }
+
+     &__content{
+          width: 600px;
+     }
+
+     &__img{
+          width: 300px;
+          height: auto;
+     }
+
+     &__heart{
+          top: 20px;
+          right: -30px;
+     }
+
+     &__content-row{
+          margin-top: 30px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+     }
+
+     &__rate{
+          color: rgb(244, 188, 18);
+     }
+
+     &__imdb{
+          width: 45px;
+     }
+
+     &__genres{
+
+     }
+
+     &__genre{
+          font-family: 'DM Sans';
+          font-weight: 700;
+          font-size: 19px;
+          line-height: 16px;
+          color: #9CA3AF;
+          margin-right: 5px;
+     }
+}
+
+
+
+
+
+//Video
+
+.videoContainer {
+     text-align: center;
+     position: relative;
+     padding-top: 250px;
+
+     &:hover {
+     .pause {
+     opacity: 1;
+     }
+     }
+}
+
+.video {
+     position: relative;
+     max-width: 100%;
+     max-height: auto;
+     z-index: 1;
+}
+
+.pause {
+     position: absolute;
+     right: 0;
+     left: 0;
+     top: 230px;
+     bottom: 0;
+     margin: auto;
+     width: 110px;
+     height: 120px;
+     transition: all 0.4s ease;
+     border-radius: 50%;
+     padding-left: 7px;
+     opacity: 0;
+     z-index: 2;
+     background-color: transparent;
+
+     &:hover {
+     width: 120px;
+     height: 130px;
+     }
+
+     &:active {
+     background-color: rgba(255, 255, 255, 0.22);
+     transition: background-color 0.1s ease;
+     }
+}
+
+@media screen and (max-width: 1440px) {
+     .video {
+     max-width: 100%;
+     }
+}
+
+@media screen and (max-width: 780px) {
+     .pause {
+     width: 80px;
+     height: 90px;
+
+     &:hover {
+     width: 100px;
+     height: 110px;
+     }
+     } 
+
+     .modal_strategy{
+     top: 85%;
+     }
+     
+}
+
+@media screen and (max-width: 655px) {
+     
+}
+
+
+
+@media screen and (max-width: 500px) {
+     .pause {
+     width: 60px;
+     height: 70px;
+
+     &:hover {
+     width: 80px;
+     height: 90px;
+     }
+     }
+}

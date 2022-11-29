@@ -10,7 +10,8 @@ export interface movieState {
 	new: any
 	videos: any
 	people:any
-
+	movieById: any
+	similiar: any
 }
 
 const initialState:movieState = {
@@ -19,6 +20,8 @@ const initialState:movieState = {
 	new: [],
 	videos: [],
 	people:[],
+	movieById: {},
+	similiar: []
 }
 
 export  const  fetchPopular = createAsyncThunk('movies/fetchPopular', 
@@ -49,6 +52,28 @@ export  const  fetchNew = createAsyncThunk('movies/fetchNew',
 	}
 )
 
+export  const  fetchById = createAsyncThunk('movies/fetchById', 
+	async (id:number) => {		
+		let res = await newService.getFilmByID(id);		
+		return res;
+	}
+)
+
+export  const  fetchSimiliar = createAsyncThunk('movies/fetchSimiliar', 
+	async (id:number) => {		
+		let res = await newService.getSimiliar(id);				
+		return res;
+	}
+)
+
+export  const  fetchVideo = createAsyncThunk('movies/fetchVideo', 
+	async (id:number) => {		
+		let res = await newService.getVideo(id);				
+		return res;
+	}
+)
+
+
 export const movieSlice = createSlice({
 	name: 'movies',
 	initialState,
@@ -62,13 +87,20 @@ export const movieSlice = createSlice({
 		[fetchTrending.fulfilled.toString()]: (state:any, action:any) => {			
 			state.trending = action.payload;
 		},
-		[fetchPeople.fulfilled.toString()]: (state:any, action:any) => {			
-			console.log(action.payload);
-			
+		[fetchPeople.fulfilled.toString()]: (state:any, action:any) => {						
 			state.people = action.payload;
 		},
 		[fetchNew.fulfilled.toString()]: (state:any, action:any) => {			
 			state.new = action.payload;
+		},
+		[fetchById.fulfilled.toString()]: (state:any, action:any) => {			
+			state.movieById = action.payload;
+		},
+		[fetchSimiliar.fulfilled.toString()]: (state:any, action:any) => {			
+			state.similiar = action.payload;
+		},
+		[fetchVideo.fulfilled.toString()]: (state:any, action:any) => {			
+			state.videos = action.payload;
 		},
 	}
 })

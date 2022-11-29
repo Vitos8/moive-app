@@ -22,17 +22,17 @@ const Dropdown = () => {
 		<div className='action' onClick={() =>setActiveMenu(!activeMenu) }	 >
 			<span>{currentUser?.name}</span>
 			<div className="profile">
-				<img src={`${user?.photoURL ?  user?.photoURL : 'Profile.png'}`} />
+				<img src={`${user?.photoURL ?  user?.photoURL : require('../../assets/Profile.png')}`} />
 			</div>
 			<div className={`menu ${activeMenu ? 'active'  : ''}`} >
 				<h3>{currentUser?.name}<br /><span>{currentUser?.email}</span></h3>
 				<ul>
 					<li>
-						<img src="Favourite.png" />
+						<img src={require('../../assets/Favourite.png')} />
 						<a href="#">Favourites</a>
 					</li>
 					<li onClick={signOut}>
-						<img src="LogOut.png" />
+						<img src={require('../../assets/LogOut.png')} />
 							<a href="#" >Logout</a>
 					</li>
 				</ul>
