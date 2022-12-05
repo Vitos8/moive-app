@@ -1,35 +1,40 @@
-import React, { FC, useRef, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from "react";
+import YouTube, { YouTubeProps } from "react-youtube";
 import "./CardPage.scss";
+import { AppDispatch, RootState } from "../../store/store";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchVideo } from "../../store/movieSclice/movieSlice";
+import { useLocation } from "react-router-dom";
 
-interface videoProps {
-     src?: string
-}
+const Trailer: FC = () => {
+     let { pathname } = useLocation();
+     let video = useSelector((state: RootState) => state.movie.videos);
+     const dispatch = useDispatch<AppDispatch>();
 
-const Trailer: FC<videoProps> = ({src = 'https://a.storyblok.com/f/149050/x/6a37c0e94f/hs-homepage.mp4',}) => {
-     const [paused, setPaused] = useState<boolean>(false)
-     const videoRef = useRef<any>(null)
+     useEffect(() => {
+          dispatch(fetchVideo(+pathname.slice(7)));
+     }, []);
 
-     let onPlayPause = () => {
-          let video = videoRef.current
-          if (video.paused) {
-               setPaused(false)
-               video.play()
-          } else {
-               setPaused(true)
-               video.pause()
-          }
-     }
+     const opts: YouTubeProps["opts"] = {
+          height: "600",
+          width: "100%",
+          playerVars: {
+               autoplay: 2,
+          },
+     };
+
+     
 
      return (
-     <div className='videoContainer'>
-          <video ref={videoRef} className='video' src={src} loop muted preload="auto" autoPlay ></video>
-          {paused ? (
-          <img src={require('../../assets/Play.png')} alt="Play" onClick={onPlayPause} className='pause'/>
-          ) : (
-          <img src={require('../../assets/Pause.png')} alt="Pause" className='pause' onClick={onPlayPause} />
-          )}
-     </div>
-     )
-     }
+          <div className="videoContainer">
+               {video.length > 0 && pathname && (
+                    <YouTube
+                         videoId={video[0]?.src.split("watch?v=")[1]}
+                         opts={opts}
+                    />
+               )}
+          </div>
+     );
+};
 
-export default Trailer
+export default Trailer;

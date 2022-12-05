@@ -102,7 +102,7 @@ export const movieSlice = createSlice({
 		[fetchVideo.fulfilled.toString()]: (state:any, action:any) => {			
 			state.videos = action.payload;
 		},
-	}
+	}	
 })
 
 export default movieSlice.reducer
