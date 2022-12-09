@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import {
      fetchById,
      fetchSimiliar,
+     fetchVideo
 } from "../../store/movieSclice/movieSlice";
 import { AppDispatch, RootState } from "../../store/store";
 import CardSlider from "../../components/CardSlider/CardSlider";
@@ -17,14 +18,16 @@ const CardPage = () => {
      const [genres, setGenres] = useState<any>([]);
      let card = useSelector((state: RootState) => state.movie.movieById);
      let similiar = useSelector((state: RootState) => state.movie.similiar);
+     let video = useSelector((state: RootState) => state.movie.videos);
      const { pathname } = useLocation();
      const dispatch = useDispatch<AppDispatch>();
-     let id =+pathname.slice(7);
 
      useEffect(() => {
+          let id =+pathname.slice(7);
           dispatch(fetchById(id));
           dispatch(fetchSimiliar(id));
-          setGenres(card && card.genres);
+          dispatch(fetchVideo(id));
+          setGenres(card?.genres);
           window.scrollTo({ top: 0 });
      }, [pathname]);
 
@@ -82,7 +85,7 @@ const CardPage = () => {
                                    </div>
                               </div>
                          </div>
-                         <Trailer />
+                         <Trailer video={video} />
                     </div>
                </div>
                <div className="card-page__similar">

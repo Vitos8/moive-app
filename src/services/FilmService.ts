@@ -62,7 +62,7 @@ class FilmService {
      _transcriptVideo(film:any) {
      return {
           name: film.name,
-          src: this._videoPath + film.key,
+          src: film.key,
           site: film.site,
           size: film.size
      }

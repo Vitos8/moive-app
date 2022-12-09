@@ -61,6 +61,30 @@
 	}
 }
 
+.goBack{
+	display: flex;
+	align-items: center;
+	column-gap: 10px;
+	cursor: pointer;
+
+	&__img{
+		width: 10px;
+		height: auto;
+		transform: rotate(180deg);
+		margin-top: 3px;
+	}
+
+	&__title{
+		font-size: 24px;
+		color: white;
+		transition: all .3s ease;
+
+		&:hover{
+			color: #BE123C;
+		}
+	}
+}
+
 
 //Dropdown
 

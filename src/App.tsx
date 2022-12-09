@@ -14,9 +14,6 @@ import { AppDispatch } from "./store/store";
 import {useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-
-
-
 let  App = () => {
      const [user] = useAuthState(auth);
      const dispatch = useDispatch<AppDispatch>()
@@ -37,7 +34,7 @@ let  App = () => {
      useEffect(() => {
           if (!user) return navigate('/SignUp');
           fetchUserName();
-     },[user])
+     },[user])     
 
      return (
           <div className="App">

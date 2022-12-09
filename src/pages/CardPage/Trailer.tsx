@@ -6,31 +6,34 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchVideo } from "../../store/movieSclice/movieSlice";
 import { useLocation } from "react-router-dom";
 
-const Trailer: FC = () => {
+interface TrailerProps {
+     video: any,
+}
+
+const Trailer: FC<TrailerProps> = ({video}) => {
      let { pathname } = useLocation();
-     let video = useSelector((state: RootState) => state.movie.videos);
-     const dispatch = useDispatch<AppDispatch>();
-
-     useEffect(() => {
-          dispatch(fetchVideo(+pathname.slice(7)));
-     }, []);
-
+          
      const opts: YouTubeProps["opts"] = {
-          height: "600",
-          width: "100%",
-          playerVars: {
+               height: "600",
+               width: "100%",
+               controls: false,
+               playerVars: {
                autoplay: 2,
           },
-     };
+     }
 
      
 
+     const onPlayerChange: YouTubeProps['onStateChange'] = (event) => {
+     }
+
      return (
           <div className="videoContainer">
-               {video.length > 0 && pathname && (
+               {video.length > 0 && pathname &&  (
                     <YouTube
-                         videoId={video[0]?.src.split("watch?v=")[1]}
+                         videoId={video[0]?.src}
                          opts={opts}
+                         onStateChange={onPlayerChange}
                     />
                )}
           </div>
