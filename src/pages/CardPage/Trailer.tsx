@@ -1,35 +1,43 @@
-import React, { FC, useRef, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from "react";
+import YouTube, { YouTubeProps } from "react-youtube";
 import "./CardPage.scss";
+import { AppDispatch, RootState } from "../../store/store";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchVideo } from "../../store/movieSclice/movieSlice";
+import { useLocation } from "react-router-dom";
 
-interface videoProps {
-     src?: string
+interface TrailerProps {
+     video: any,
 }
 
-const Trailer: FC<videoProps> = ({src = 'https://a.storyblok.com/f/149050/x/6a37c0e94f/hs-homepage.mp4',}) => {
-     const [paused, setPaused] = useState<boolean>(false)
-     const videoRef = useRef<any>(null)
+const Trailer: FC<TrailerProps> = ({video}) => {
+     let { pathname } = useLocation();
+          
+     const opts: YouTubeProps["opts"] = {
+               height: "600",
+               width: "100%",
+               controls: false,
+               playerVars: {
+               autoplay: 2,
+          },
+     }
 
-     let onPlayPause = () => {
-          let video = videoRef.current
-          if (video.paused) {
-               setPaused(false)
-               video.play()
-          } else {
-               setPaused(true)
-               video.pause()
-          }
+     
+
+     const onPlayerChange: YouTubeProps['onStateChange'] = (event) => {
      }
 
      return (
-     <div className='videoContainer'>
-          <video ref={videoRef} className='video' src={src} loop muted preload="auto" autoPlay ></video>
-          {paused ? (
-          <img src={require('../../assets/Play.png')} alt="Play" onClick={onPlayPause} className='pause'/>
-          ) : (
-          <img src={require('../../assets/Pause.png')} alt="Pause" className='pause' onClick={onPlayPause} />
-          )}
-     </div>
-     )
-     }
+          <div className="videoContainer">
+               {video.length > 0 && pathname &&  (
+                    <YouTube
+                         videoId={video[0]?.src}
+                         opts={opts}
+                         onStateChange={onPlayerChange}
+                    />
+               )}
+          </div>
+     );
+};
 
-export default Trailer
+export default Trailer;

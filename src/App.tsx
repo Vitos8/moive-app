@@ -13,9 +13,7 @@ import {auth} from './firebase'
 import { AppDispatch } from "./store/store";
 import {useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-
-
-
+import CardsPage from './pages/CardsPage/CardsPage';
 
 let  App = () => {
      const [user] = useAuthState(auth);
@@ -37,7 +35,7 @@ let  App = () => {
      useEffect(() => {
           if (!user) return navigate('/SignUp');
           fetchUserName();
-     },[user])
+     },[user])     
 
      return (
           <div className="App">
@@ -46,6 +44,7 @@ let  App = () => {
                     <Route path='/SignUp'  element={<SignUp/>} />
                     <Route path='/Login'  element={<Login/>} />
                     <Route path='/Movie/:id'  element={<CardPage/>} />
+                    <Route path='/Movies/:type'  element={<CardsPage/>} />
                </Routes>
                <ToastContainer limit={1} />
           </div>     

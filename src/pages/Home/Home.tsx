@@ -24,9 +24,9 @@ const Home = () => {
      
      useEffect(() => {
           dispatch(fetchTrending());
-          dispatch(fetchPopular());
+          dispatch(fetchPopular(1));
           dispatch(fetchPeople());
-          dispatch(fetchNew());
+          dispatch(fetchNew(1));
      },[])
 
      return (

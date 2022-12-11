@@ -2,11 +2,11 @@ import {onError} from "../utils/toasts";
 
 class FilmService {
 
-     _apiKey:string = 'f2806dca9da61eeec0705fa9fceccb1a';
-     _apiBase:string = 'https://api.themoviedb.org/3/';
-     _basePage:number = 1;
-     _imgPath:string = "https://image.tmdb.org/t/p/original/";
-     _videoPath:string = 'https://www.youtube.com/watch?v=';
+     private _apiKey:string = 'f2806dca9da61eeec0705fa9fceccb1a';
+     private _apiBase:string = 'https://api.themoviedb.org/3/';
+     private _basePage:number = 1;
+     private _imgPath:string = "https://image.tmdb.org/t/p/original/";
+     private _videoPath:string = 'https://www.youtube.com/watch?v=';
 
      // function template to get resource from db
      getResource = async (url:string) => {
@@ -19,9 +19,15 @@ class FilmService {
      return await result.json();
      }
 
+
      getTrending = async () => {
           const res = await this.getResource(`${this._apiBase}trending/movie/week?api_key=${this._apiKey}`);           
           return res.results.map((item:any) => this._transcriptFilm(item)).slice(0,10);
+     }
+
+     getSearch = async (query: string) => {
+          const res = await this.getResource(`${this._apiBase}search/movie?api_key=${this._apiKey}&language=en-US&query=${query}&page=${this._basePage}&include_adult=false`);           
+          return res.results.map((item:any) => this._transcriptFilm(item)).slice(0,5);
      }
 
      getFilmByID = async (id:number) => {
@@ -54,15 +60,15 @@ class FilmService {
           return res.results.map((item:any) => this._transcriptPeople(item));
      }
 
-     getNew = async() => {
-          const res = await this.getResource(`${this._apiBase}movie/upcoming?api_key=${this._apiKey}&language=en-US&page=2`); // required page number
+     getNew = async(page =this._basePage) => {
+          const res = await this.getResource(`${this._apiBase}movie/upcoming?api_key=${this._apiKey}&language=en-US&page=${page}`); // required page number
           return res.results.map((item:any) => this._transcriptFilm(item));
      }
 
      _transcriptVideo(film:any) {
      return {
           name: film.name,
-          src: this._videoPath + film.key,
+          src: film.key,
           site: film.site,
           size: film.size
      }
@@ -71,11 +77,12 @@ class FilmService {
      _transcriptFilm(film:any) {
      return {
           id: film.id,
-          title: film.original_title,
+          title: film.title,
           genres_ids: film.genre_ids,
           description: film.overview,
           rate: film.vote_average,
           poster: 'https://image.tmdb.org/t/p/w500' + film.poster_path,
+          miniPoster: 'https://image.tmdb.org/t/p/w500' + film.poster_path,
           backdrop:this._imgPath + film.backdrop_path,
      }
      }
