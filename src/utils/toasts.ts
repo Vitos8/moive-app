@@ -11,7 +11,7 @@ export const onError = (error:string) => toast.error(error, {
 });
 
 export const onSucces = (msg:string) => toast.success("🦄  "+ msg, {
-	position: "top-center",
+	position: "top-right",
 	autoClose: 5000,
 	hideProgressBar: false,
 	closeOnClick: true,

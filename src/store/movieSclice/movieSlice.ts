@@ -12,6 +12,7 @@ export interface movieState {
 	people:any
 	movieById: any
 	similiar: any
+	search: any
 }
 
 const initialState:movieState = {
@@ -21,12 +22,13 @@ const initialState:movieState = {
 	videos: [],
 	people:[],
 	movieById: {},
-	similiar: []
+	similiar: [],
+	search: [],
 }
 
 export  const  fetchPopular = createAsyncThunk('movies/fetchPopular', 
-	async () => {
-		let res = await newService.getPopular();
+	async (page:number) => {
+		let res = await newService.getPopular(page);
 		return res;
 	}
 )
@@ -46,8 +48,8 @@ export  const  fetchPeople = createAsyncThunk('movies/fetchPeople',
 )
 
 export  const  fetchNew = createAsyncThunk('movies/fetchNew', 
-	async () => {
-		let res = await newService.getNew();
+	async (page:number) => {
+		let res = await newService.getNew(page);
 		return res;
 	}
 )
@@ -69,6 +71,13 @@ export  const  fetchSimiliar = createAsyncThunk('movies/fetchSimiliar',
 export  const  fetchVideo = createAsyncThunk('movies/fetchVideo', 
 	async (id:number) => {		
 		let res = await newService.getVideo(id);				
+		return res;
+	}
+)
+
+export  const  fetchSearch = createAsyncThunk('movies/fetchSearch', 
+	async (query:string) => {		
+		let res = await newService.getSearch(query);				
 		return res;
 	}
 )
@@ -101,6 +110,9 @@ export const movieSlice = createSlice({
 		},
 		[fetchVideo.fulfilled.toString()]: (state:any, action:any) => {			
 			state.videos = action.payload;
+		},
+		[fetchSearch.fulfilled.toString()]: (state:any, action:any) => {			
+			state.search = action.payload;
 		},
 	}	
 })

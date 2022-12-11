@@ -3,6 +3,7 @@ import "./CardSlider.scss";
 import Slider from "react-slick";
 import { CardSliderSettings } from "../../utils/SlickOptions";
 import { useNavigate } from "react-router-dom";
+import Card from "./Card"
 
 interface CardProps {
      title: string;
@@ -20,11 +21,13 @@ const CardSlider: FC<CardProps> = ({ title, type, data }) => {
 		}
 	};
 
+     const seeMoreRoute = title.includes('Movie') ? '/Movies/Featured' : title.includes('actors') ? '/Movies/People'  :  '/Movies/New-Arrival';
+
      return (
           <>
                <div className="card-slider container">
                     <h3 className="card-slider__title">{title}</h3>
-                    <div className="card-slider__more-row">
+                    <div className="card-slider__more-row" onClick={() => navigate(seeMoreRoute)}>
                          <span className="card-slider__more">See more</span>
                          <img
                               className="card-slider__more-img"
@@ -53,46 +56,7 @@ const CardSlider: FC<CardProps> = ({ title, type, data }) => {
                          className=" container">
                          {data &&
                               data.map((item: any) => (
-                                   <div
-                                        className="card"
-                                        key={item?.id}
-                                        onClick={(e:any) => onClickCard(e, item.id)}>
-                                        <div className="card__poster">
-                                             <img
-                                                  src={item?.poster}
-                                                  className="card__poster-img"
-                                                  alt="poster"
-                                             />
-                                             {type === "movie" && (
-                                                  <img
-                                                       src={require("../../assets/heart.png")}
-                                                       className="card__poster-heart"
-                                                       alt="poster"
-                                                  />
-                                             )}
-                                        </div>
-                                        {type === "movie" ? (
-                                             <div className="card__info">
-                                                  <h5 className="card__title">
-                                                       {item?.title}
-                                                  </h5>
-                                                  <div className="card__info-row">
-                                                       <img
-                                                            src={require("../../assets/IMDB.png")}
-                                                            alt="IMDB"
-                                                            className="card__imdb"
-                                                       />
-                                                       <div className="card__rate">
-                                                            {item?.rate}
-                                                       </div>
-                                                  </div>
-                                             </div>
-                                        ) : (
-                                             <h5 className="card__title">
-                                                  {item?.title}
-                                             </h5>
-                                        )}
-                                   </div>
+                                   <Card item={item} type={type} onClickCard={onClickCard}/>
                               ))}
                     </Slider>
                </div>
