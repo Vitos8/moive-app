@@ -1,7 +1,5 @@
 import React,{useEffect} from 'react'
 import {Route, Routes} from 'react-router-dom'
-import Login from './pages/Auth/Login';
-import SignUp from './pages/Auth/SignUp';
 import Home from "./pages/Home/Home"
 import { ToastContainer} from 'react-toastify';
 import CardPage from './pages/CardPage/CardPage';
@@ -10,10 +8,12 @@ import {db} from "./firebase";
 import { setUser } from "./store/userSlice/userSlice";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {auth} from './firebase'
+import Auth from './pages/Auth/Auth';
 import { AppDispatch } from "./store/store";
 import {useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import CardsPage from './pages/CardsPage/CardsPage';
+import Favourites from './pages/Favourites/Favourites';
 
 let  App = () => {
      const [user] = useAuthState(auth);
@@ -33,7 +33,7 @@ let  App = () => {
      };
 
      useEffect(() => {
-          if (!user) return navigate('/SignUp');
+          if (!user) return navigate('/Auth');
           fetchUserName();
      },[user])     
 
@@ -41,10 +41,10 @@ let  App = () => {
           <div className="App">
                <Routes>
                     <Route path='/'  element={<Home/>} />
-                    <Route path='/SignUp'  element={<SignUp/>} />
-                    <Route path='/Login'  element={<Login/>} />
+                    <Route path='/Auth'  element={<Auth/>} />
                     <Route path='/Movie/:id'  element={<CardPage/>} />
                     <Route path='/Movies/:type'  element={<CardsPage/>} />
+                    <Route path='/Favourites'  element={<Favourites/>} />
                </Routes>
                <ToastContainer limit={1} />
           </div>     

@@ -1,9 +1,11 @@
-import { FC, useRef } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import "./CardSlider.scss";
 import Slider from "react-slick";
 import { CardSliderSettings } from "../../utils/SlickOptions";
 import { useNavigate } from "react-router-dom";
-import Card from "./Card"
+import Card from "./Card";
+import { collection, addDoc, getDocs, where, query } from "firebase/firestore";
+import { db } from "../../firebase";
 
 interface CardProps {
      title: string;
@@ -12,22 +14,53 @@ interface CardProps {
 }
 
 const CardSlider: FC<CardProps> = ({ title, type, data }) => {
+     const [favourites, setFavourites] = useState<any>([]);
+     const [clickedLike, setClickedLike] = useState<number>(0);
      let SliderRef = useRef<any>();
      let navigate = useNavigate();
 
-     let onClickCard = (e:any, id:number) => {
-		if (type === 'movie') {
-			navigate('/Movie/' + id);
-		}
-	};
+     let onClickCard = (e: any, id: number) => {
+          if (type === "movie") {
+               navigate("/Movie/" + id);
+          }
+     };
 
-     const seeMoreRoute = title.includes('Movie') ? '/Movies/Featured' : title.includes('actors') ? '/Movies/People'  :  '/Movies/New-Arrival';
+     let onClickedLike = () => {
+          setClickedLike((like) => like  + 1)
+     }
+
+     const fetchUserFavourites = async () => {
+          try {
+               const q = query(collection(db, "favourites"));
+               const doc = await getDocs(q);
+               const data = doc.docs.map((item: any) => item.data());
+               setFavourites(data);
+          } catch (err) {
+               console.error(err);
+          }
+     };
+
+     const seeMoreRoute = title.includes("Movie")
+          ? "/Movies/Featured"
+          : title.includes("actors")
+          ? "/Movies/People"
+          : "/Movies/New-Arrival";
+
+     useEffect(() => {
+          fetchUserFavourites();
+     }, []);
+
+     useEffect(() => {
+          fetchUserFavourites();
+     }, [clickedLike]);
 
      return (
           <>
                <div className="card-slider container">
                     <h3 className="card-slider__title">{title}</h3>
-                    <div className="card-slider__more-row" onClick={() => navigate(seeMoreRoute)}>
+                    <div
+                         className="card-slider__more-row"
+                         onClick={() => navigate(seeMoreRoute)}>
                          <span className="card-slider__more">See more</span>
                          <img
                               className="card-slider__more-img"
@@ -56,7 +89,13 @@ const CardSlider: FC<CardProps> = ({ title, type, data }) => {
                          className=" container">
                          {data &&
                               data.map((item: any) => (
-                                   <Card item={item} type={type} onClickCard={onClickCard}/>
+                                   <Card
+                                        item={item}
+                                        type={type}
+                                        onClickCard={onClickCard}
+                                        favourites={favourites}
+                                        onClickedLike={onClickedLike}
+                                   /> 
                               ))}
                     </Slider>
                </div>

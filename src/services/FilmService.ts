@@ -65,7 +65,7 @@ class FilmService {
           return res.results.map((item:any) => this._transcriptFilm(item));
      }
 
-     _transcriptVideo(film:any) {
+     private _transcriptVideo(film:any) {
      return {
           name: film.name,
           src: film.key,
@@ -74,7 +74,7 @@ class FilmService {
      }
      }
 
-     _transcriptFilm(film:any) {
+     private _transcriptFilm(film:any) {
      return {
           id: film.id,
           title: film.title,
@@ -84,10 +84,11 @@ class FilmService {
           poster: 'https://image.tmdb.org/t/p/w500' + film.poster_path,
           miniPoster: 'https://image.tmdb.org/t/p/w500' + film.poster_path,
           backdrop:this._imgPath + film.backdrop_path,
-     }
+          onLike: false,
+          }
      }
 
-     _transcriptFilmId(film:any) {
+     private _transcriptFilmId(film:any) {
           return {
                id: film.id,
                title: film.original_title,
@@ -98,7 +99,7 @@ class FilmService {
           }
      }
 
-     _transcriptPeople(people:any) {
+     private _transcriptPeople(people:any) {
           return {
                id: people.id,
                title: people.name,

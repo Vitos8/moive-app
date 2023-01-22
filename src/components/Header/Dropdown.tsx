@@ -17,19 +17,23 @@ const Dropdown = () => {
 		navigate('/SignUp');
 		logout();	
 	}
+
+	let onFavourites = () => {
+		navigate('/Favourites');
+	}
 	
 	return (
 		<div className='action' onClick={() =>setActiveMenu(!activeMenu) }	 >
 			<span>{currentUser?.name}</span>
 			<div className="profile">
-				<img src={`${user?.photoURL ?  user?.photoURL : require('../../assets/Profile.png')}`} />
+				<img src={`${user?.photoURL ?  user?.photoURL : 'https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80'}`} />
 			</div>
 			<div className={`menu ${activeMenu ? 'active'  : ''}`} >
 				<h3>{currentUser?.name}<br /><span>{currentUser?.email}</span></h3>
 				<ul>
 					<li>
 						<img src={require('../../assets/Favourite.png')} />
-						<a href="#">Favourites</a>
+						<a onClick={onFavourites}>Favourites</a>
 					</li>
 					<li onClick={signOut}>
 						<img src={require('../../assets/LogOut.png')} />

@@ -1,11 +1,11 @@
 
 .main-slider{
-	margin: -2px 0px 0px -2px;
+	margin: -2px 0px 0px -5px;
 
 	&__image{
 		position: absolute;
 		z-index: 1;
-		height: 100vh; 	
+		height:  calc(100vh + 5px) ; 	
 		width: 100%;
 		object-fit: cover;
 		margin-bottom: 100vh;

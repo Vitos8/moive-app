@@ -11,6 +11,7 @@ interface TrailerProps {
 }
 
 const Trailer: FC<TrailerProps> = ({video}) => {
+     const [refresh, setRefresh] = useState<Boolean>(false);
      let { pathname } = useLocation();
           
      const opts: YouTubeProps["opts"] = {
@@ -25,6 +26,7 @@ const Trailer: FC<TrailerProps> = ({video}) => {
      
 
      const onPlayerChange: YouTubeProps['onStateChange'] = (event) => {
+          setRefresh(true)
      }
 
      return (

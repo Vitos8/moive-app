@@ -36,6 +36,10 @@ const Header = ({ px }: { px: number }) => {
           }
      }, [debouncedValue]);
 
+     useEffect(() => {
+          setSearchValue('');
+     }, [pathname])
+
      let handleNavigation = (e: any) => {
           const window = e.currentTarget;
           setY(window.scrollY);
@@ -49,7 +53,7 @@ const Header = ({ px }: { px: number }) => {
           <div
                className="header"
                style={{
-                    backgroundColor: `${y >= px ? "#545AA7" : "transparent"} `,
+                    backgroundColor: `${y >= px ? "#BE123C" : "transparent"} `,
                }}>
                <div className="container">
                     <nav className="header__nav">
@@ -59,7 +63,7 @@ const Header = ({ px }: { px: number }) => {
                                    onClick={() => navigate(-1)}>
                                    <img
                                         className="goBack__img"
-                                        src={require("../../assets/seeMoreArrow.png")}
+                                        src={require("../../assets/LeftArrow.png")}
                                         alt="Logo"
                                    />
                                    <div className="goBack__title">Go back</div>

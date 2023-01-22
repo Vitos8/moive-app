@@ -7,7 +7,8 @@ export const MainSliderSettings:any = {
 	swipeToSlide: true,
 	autoplay: true,
 	fade: true,
-	speed: 500,
+	autoPlaySpeed: 5000,
+	speed: 1500,
 	slidesToShow: 1,
 	slidesToScroll: 1,
 	arrows: false,
@@ -22,7 +23,7 @@ export const CardSliderSettings:any = {
 	swipetoSlide: true,
 	adaptiveHeight: true,
 	slidesToShow: 4,
-	slidesToScroll: 4,
+	slidesToScroll: 1,
 	autoplay: true,
 	responsive: [
 	{
