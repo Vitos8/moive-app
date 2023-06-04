@@ -8,39 +8,32 @@ import { AppDispatch } from "../../store/store";
 import {
      onLikeMovie,
      onAddToFavourite,
+     onRemoveFromFavourite
 } from "../../store/movieSclice/movieSlice";
-import firebase from '@firebase/app';
-
+import firebase from "@firebase/app";
 
 interface CardProps {
      item: any;
      type: string;
-     favourites?: any;
+     movieType?: string;
      onClickCard: (e: any, id: number) => void;
-     onClickedLike?: any;
 }
 
-const Card: FC<CardProps> = ({ item, type, onClickCard, favourites, onClickedLike }) => {
-     const [liked, setLiked] = useState<boolean>(false);
+const Card: FC<CardProps> = ({ item, type, onClickCard , movieType}) => {
      const dispatch = useDispatch<AppDispatch>();
-
-     useEffect(() => {
-          const checkLiked =favourites && favourites.find((movie: any) => item.id === movie.id);          
-          setLiked(checkLiked  ? true : false);
-     }, []);
 
      const onHandleLike = async (e: any) => {
           e.stopPropagation();
-          onClickedLike()
-          await deleteDoc(doc(db, "favourites", item.id));
-          //if (liked) {
-          //     setLiked(false);
-          //}    
-          //await addDoc(collection(db, "favourites"), item);
-          //setLiked(true);
-          //onSuccesFavourite("The movie added to Favourites !");
+          dispatch(onLikeMovie({ id: item.id, type: movieType ? movieType : '' }));
+
+          if (!item.onLike) {
+               dispatch(onAddToFavourite({ ...item, onLike: true }));
+               //onSuccesFavourite("The movie added to Favourites !");
+               return;
+          }
+          dispatch(onRemoveFromFavourite(item.id))
+          //onSuccesFavourite("The movie removed from Favourites !");
      };
-//console.log(favourites);
 
      return (
           <div
@@ -57,7 +50,9 @@ const Card: FC<CardProps> = ({ item, type, onClickCard, favourites, onClickedLik
                          <img
                               src={require("../../assets/heart.png")}
                               className={`card__poster-heart  ${
-                                   liked ? "card__poster-heart-active" : ""
+                                   item.onLike
+                                        ? "card__poster-heart-active"
+                                        : ""
                               }`}
                               alt="poster"
                               onClick={(e) => onHandleLike(e)}

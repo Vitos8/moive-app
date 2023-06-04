@@ -22,7 +22,7 @@ export interface movieState {
 	favourites: any,
 }
 
-const initialState: movieState = {
+const initialState: any = {
      popular: [],
      trending: [],
      new: [],
@@ -102,28 +102,36 @@ export const movieSlice = createSlice({
           onAddToFavourite : (state, action: PayloadAction<any>) => {
 			state.favourites = [...state.favourites, action.payload];
 		},
+          onRemoveFromFavourite : (state, action: PayloadAction<any>) => {
+			state.favourites = state.favourites.filter((item:any) => item.id !== action.payload);
+		},
           onLikeMovie: (state, action: PayloadAction<IpayloadOnLike>) => {
-               if(action.payload.type === 'new' ) {
-                    state.new = state.new.map((item: any) => {
+               //if(action.payload.type === 'new' ) {
+                    state[action.payload.type] = state[action.payload.type].map((item: any) => {
                          if (item.id === action.payload.id) {
                               item.onLike = !item.onLike;
+                              return item;
                          }
                          return item;
                     });
-               }
-               if(action.payload.type === 'popular' ) {
-                    state.popular = state.popular.map((item: any) => {
-                         if (item.id === action.payload.id) {
-                              item.onLike = !item.onLike;
-                         }
-                         return item;
-                    });
-               }
+               //}
+               //if(action.payload.type === 'popular' ) {
+               //     state.popular = state.popular.map((item: any) => {
+               //          if (item.id === action.payload.id) {
+               //               item.onLike = !item.onLike;
+               //               return item;
+               //          }
+               //          return item;
+               //     });
+               //}
           }
      },
      extraReducers: {
           [fetchPopular.fulfilled.toString()]: (state: any, action: any) => {
-               state.popular = action.payload;
+               state.popular = action.payload.map((item:any) => {
+                    item.onLike = false;
+                    return item;
+               });
           },
           [fetchTrending.fulfilled.toString()]: (state: any, action: any) => {
                state.trending = action.payload;
@@ -132,7 +140,10 @@ export const movieSlice = createSlice({
                state.people = action.payload;
           },
           [fetchNew.fulfilled.toString()]: (state: any, action: any) => {
-               state.new = action.payload;
+               state.new = action.payload.map((item:any) => {
+                    item.onLike = false;
+                    return item;
+               });
           },
           [fetchById.fulfilled.toString()]: (state: any, action: any) => {
                state.movieById = action.payload;
@@ -150,4 +161,4 @@ export const movieSlice = createSlice({
 });
 
 export default movieSlice.reducer;
-export const {onLikeMovie, onAddToFavourite } = movieSlice.actions;
+export const {onLikeMovie, onAddToFavourite, onRemoveFromFavourite } = movieSlice.actions;

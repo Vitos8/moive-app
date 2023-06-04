@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import "./Favourites.scss";
 import Card from "../../components/CardSlider/Card";
 import Footer from "../../components/Footer/Footer";
@@ -15,18 +15,27 @@ const Favourites: FC = () => {
 		navigate('/Movie/' + id);
 	}
 
+	useEffect(() => {
+		window.scrollTo({ top: 0 });
+	}, [])
+	
+
      return (
           <div>
                <Header px={0} />
 			<div className="favourites">
 				<div className="container">
+					<div className="favourites__title">Your favourites movies </div>
 					<div className="favourites__row">
 						{favourites && favourites.map((item:any) => (
-							<Card item={item} type='movie' onClickCard={onClickCard} />
+							<Card item={item} movieType='favourites' type='movie' onClickCard={onClickCard} />
 						))}
 					</div>
+					{favourites.length === 0 && (
+						<div className="favourites__notFound">You don't have favourites movies </div>
+					)}
 				</div>
-			</div>
+			</div>w
                <Footer />
           </div>
      );

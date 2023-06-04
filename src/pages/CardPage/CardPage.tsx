@@ -42,12 +42,7 @@ const CardPage = () => {
                                         className="card__poster-img card-page__img"
                                         src={card?.poster}
                                         alt="Poster"
-                                   />
-                                   <img
-                                        className="card__poster-heart card-page__heart"
-                                        src={require("../../assets/heart.png")}
-                                        alt="heart"
-                                   />
+                                   />w
                               </div>
                               <div className="card-page__content">
                                    <h3 className="card-page__title">
@@ -92,6 +87,7 @@ const CardPage = () => {
                     <CardSlider
                          title="Similiar movies"
                          type="movie"
+                         movieType='similiar'
                          data={similiar}
                     />
                </div>

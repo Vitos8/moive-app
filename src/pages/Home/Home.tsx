@@ -33,8 +33,8 @@ const Home = () => {
           <div className="home">
                <Header px={100}/>
                <MainSlider/>               
-               <CardSlider title="Featured Movie" type="movie" data={popularMovies} /> 
-               <CardSlider title="New Arrival" type="movie" data={newMovies} /> 
+               <CardSlider title="Featured Movie" movieType='popular' type="movie" data={popularMovies} /> 
+               <CardSlider title="New Arrival" movieType='new' type="movie" data={newMovies} /> 
                <CardSlider title="Featured actors" type="people" data={people}  /> 
                <Footer/>
           </div>

@@ -25,6 +25,9 @@ const CardsPage = () => {
 	},[])
 	
      let onClickCard = (e:any, id:number) => {
+		if (pathname.includes('People')) {
+			return;
+		}
 		navigate('/Movie/' + id);
 	};
 
@@ -38,15 +41,15 @@ const CardsPage = () => {
                     <div className="cards__row">
 					{pathname.includes('Featured') &&
 					popularMovies?.map((item:any) => (
-						<Card item={item} type={'movie'} onClickCard={onClickCard} />
+						<Card key={item.id} item={item} type={'movie'} onClickCard={onClickCard} />
 					))}
 					{pathname.includes('People') && 						
 						people?.map((item:any) => (
-						<Card item={item} type={'people'} onClickCard={onClickCard} />
+						<Card key={item.id} item={item} type={'people'} onClickCard={onClickCard} />
 					))}		
 					{pathname.includes('New-Arrival') && 
 					newMovies?.map((item:any) => (
-						<Card item={item} type={'movie'} onClickCard={onClickCard} />
+						<Card key={item.id} item={item} type={'movie'} onClickCard={onClickCard} />
 					))}
 				</div>
                </div>

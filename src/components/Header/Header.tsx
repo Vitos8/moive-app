@@ -6,7 +6,7 @@ import { AppDispatch, RootState } from "../../store/store";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchSearch } from "../../store/movieSclice/movieSlice";
 import useDebounce from "../../hooks/useDebounce";
-
+import arrowLeftSvg  from "../../assets/icons/arrow-left.svg";
 
 const Header = ({ px }: { px: number }) => {
      const [searchValue, setSearchValue] = useState<string>("");
@@ -57,13 +57,13 @@ const Header = ({ px }: { px: number }) => {
                }}>
                <div className="container">
                     <nav className="header__nav">
-                         {pathname.includes("Movie") ? (
+                         {pathname.includes("Movie") || pathname.includes('Favourites') ? (
                               <div
                                    className="goBack"
                                    onClick={() => navigate(-1)}>
                                    <img
                                         className="goBack__img"
-                                        src={require("../../assets/LeftArrow.png")}
+                                        src={arrowLeftSvg as any}
                                         alt="Logo"
                                    />
                                    <div className="goBack__title">Go back</div>

@@ -10,12 +10,11 @@ import { db } from "../../firebase";
 interface CardProps {
      title: string;
      type: string;
+     movieType?: string;
      data: any;
 }
 
-const CardSlider: FC<CardProps> = ({ title, type, data }) => {
-     const [favourites, setFavourites] = useState<any>([]);
-     const [clickedLike, setClickedLike] = useState<number>(0);
+const CardSlider: FC<CardProps> = ({ title, type, movieType, data }) => {
      let SliderRef = useRef<any>();
      let navigate = useNavigate();
 
@@ -25,34 +24,11 @@ const CardSlider: FC<CardProps> = ({ title, type, data }) => {
           }
      };
 
-     let onClickedLike = () => {
-          setClickedLike((like) => like  + 1)
-     }
-
-     const fetchUserFavourites = async () => {
-          try {
-               const q = query(collection(db, "favourites"));
-               const doc = await getDocs(q);
-               const data = doc.docs.map((item: any) => item.data());
-               setFavourites(data);
-          } catch (err) {
-               console.error(err);
-          }
-     };
-
      const seeMoreRoute = title.includes("Movie")
           ? "/Movies/Featured"
           : title.includes("actors")
           ? "/Movies/People"
           : "/Movies/New-Arrival";
-
-     useEffect(() => {
-          fetchUserFavourites();
-     }, []);
-
-     useEffect(() => {
-          fetchUserFavourites();
-     }, [clickedLike]);
 
      return (
           <>
@@ -90,11 +66,11 @@ const CardSlider: FC<CardProps> = ({ title, type, data }) => {
                          {data &&
                               data.map((item: any) => (
                                    <Card
+                                        key={item.id}
                                         item={item}
                                         type={type}
+                                        movieType={movieType}
                                         onClickCard={onClickCard}
-                                        favourites={favourites}
-                                        onClickedLike={onClickedLike}
                                    /> 
                               ))}
                     </Slider>
